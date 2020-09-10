@@ -1,27 +1,21 @@
 import os
 import time
-import logging
 from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
+from event import FileCreationHandler
 
-def on_created(event):
-    print("File created")
-    
-        
-if __name__ == "__main__":
-    path = "D:/Usuario/Downloads"
-    destination = "D:/Usuario/Downloads/Images"
-    event_handler = FileSystemEventHandler()
+print("monitoring")
 
-    observer = Observer()
-    observer.schedule(event_handler, path, recursive=True)
+pathtowatch = "D:/Usuario/Downloads/Downloads"
+event_handler = FileCreationHandler()
 
-    event_handler.on_created = on_created
-    
-    observer.start()
-    try:
-        while True:
-            time.sleep(1)
-    except KeyboardInterrupt:
-        observer.stop()
-    observer.join()
+observer = Observer()
+observer.schedule(event_handler, pathtowatch, recursive=True)
+
+observer.start()
+try:
+    while True:
+        print("timer")
+        time.sleep(0.1)
+except KeyboardInterrupt:
+    observer.stop()
+observer.join()
