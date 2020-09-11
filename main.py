@@ -4,7 +4,6 @@ from watchdog.observers import Observer
 from event import FileCreationHandler
 from event import event_triggered
 
-time.sleep(10)
 event_triggered()
 
 pathtowatch = "D:/Usuario/Downloads"
